@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StockMangementAPI_Counsume.Models.UserModel>
+
+@* <div class="card-sub"> *@
+<div class="card">
+	<div class="card-body">
+	<h5 class="card-title">User Data</h5>
+	<a class="d-flex justify-content-end" asp-controller="User" asp-action="UserForm">
+		<button class="btn btn-primary" style="margin-top:20px">Add User</button>
+	</a>
+
+<table class="table table-striped" style="width:70%;margin-left:300px">
+	<thead>
+		<tr>
+			<th scope="col">UserID</th>
+			<th scope="col">UserName</th>
+			<th scope="col">Password</th>
+			<th scope="col">Email</th>
+			<th scope="col">Phone Number</th>
+			<th scope="col">Created</th>
+			<th scope="col">Modified</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var row in Model)
+		{
+			<tr>
+				<td>@row.UserID</td>
+				<td>@row.UserName</td>
+				<td>@row.Password</td>
+				<td>@row.Email</td> 
+			 	<td>@row.PhoneNumber</td>
+				<td>@row.Created</td>
+				<td>@row.Modified</td>
+				<td><a asp-controller="User" asp-action="UserForm" asp-route-UserID="@row.UserID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>
+				<td>
+					<a asp-controller="User" asp-action="UserDelete" asp-route-UserID="@row.UserID">
+						<button class="btn btn-danger" onclick="return confirm('Are you sure you want delete the data?')"><i class="bi bi-trash"></i></button>
+					</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+</div>
+</div>
+@* </div> *@
