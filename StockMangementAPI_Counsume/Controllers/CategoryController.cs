@@ -7,61 +7,52 @@ namespace StockMangementAPI_Counsume.Controllers
 {
     public class CategoryController : Controller
     {
-		Uri baseaddress = new Uri("http://localhost:5165/api");
-		private readonly HttpClient _httpClient;
+		Uri baseAddress = new Uri("http://localhost:5165/api");
+		private readonly HttpClient _client;
+
 		public CategoryController()
 		{
-			_httpClient = new HttpClient();
-			_httpClient.BaseAddress = baseaddress;
+			_client = new HttpClient();
+			_client.BaseAddress = baseAddress;
 		}
-		public IActionResult Index()
-        {
-            return View();
-        }
+		#region CategoryList
 		[HttpGet]
 		public IActionResult CategoryList()
 		{
 			List<CategoryModel> category = new List<CategoryModel>();
-			HttpResponseMessage response = _httpClient.GetAsync($"{_httpClient}/Category/GetAll").Result;
+			HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/Category/GetAll").Result;
 			if (response.IsSuccessStatusCode)
 			{
 				string data = response.Content.ReadAsStringAsync().Result;
-				dynamic jsonobj = JsonConvert.DeserializeObject<dynamic>(data);
-				var extdata = JsonConvert.SerializeObject(jsonobj);
-				category = JsonConvert.DeserializeObject<List<CategoryModel>>(extdata);
+				dynamic jsonobject = JsonConvert.DeserializeObject(data);
+				var extData = JsonConvert.SerializeObject(jsonobject);
+				category = JsonConvert.DeserializeObject<List<CategoryModel>>(extData);
+
 			}
-			return View("CategoryList", category);
+
+			return View(category);
 		}
+		#endregion
+		#region CategoryForm
 		public async Task<IActionResult> CategoryForm(int? CategoryID)
 		{
+			//await LoadUserList();
 			if (CategoryID.HasValue)
 			{
-				List<CategoryModel> category = new List<CategoryModel>();
-				HttpResponseMessage response = _httpClient.GetAsync($"{_httpClient.BaseAddress}/Category/GetByID/{CategoryID}").Result;
+				var response = await _client.GetAsync($"{_client.BaseAddress}/Category/GetbyID/{CategoryID}");
 				if (response.IsSuccessStatusCode)
 				{
-					string data = response.Content.ReadAsStringAsync().Result;
-					dynamic jsonobject = JsonConvert.DeserializeObject(data);
-					var extData = JsonConvert.SerializeObject(jsonobject);
-					category = JsonConvert.DeserializeObject<List<CategoryModel>>(extData);
+					var data = await response.Content.ReadAsStringAsync();
+					var category = JsonConvert.DeserializeObject<CategoryModel>(data);
 					//ViewBag.userList = await GetStatesByCountryID(city.CountryID);
-					CategoryModel categoryModel = new CategoryModel
-					{
-						CategoryID = category[0].CategoryID,
-						CategoryName = category[0].CategoryName,
-						Created=category[0].Created,
-						Modified=category[0].Modified,
-					};
-					return View(categoryModel);
+					return View(category);
 				}
-				else
-				{
-					return RedirectToAction("CategoryList");
-				}
-
 			}
 			return View("CategoryForm", new CategoryModel());
 		}
+		#endregion
+		#region CategorySave
+
 		[HttpPost]
 		public async Task<IActionResult> CategorySave([FromForm] CategoryModel category)
 		{
@@ -69,13 +60,14 @@ namespace StockMangementAPI_Counsume.Controllers
 			{
 				if (ModelState.IsValid)
 				{
+
 					var json = JsonConvert.SerializeObject(category);
 					var content = new StringContent(json, Encoding.UTF8, "application/json");
 					HttpResponseMessage response;
 
-					if (category.CategoryID == null)
+					if (category.CategoryID == null || category.CategoryID == 0)
 					{
-						response = await _httpClient.PostAsync($"{_httpClient.BaseAddress}/Category/Insert", content);
+						response = await _client.PostAsync($"{_client.BaseAddress}/Category/Insert", content);
 						if (response.IsSuccessStatusCode)
 						{
 							TempData["Message"] = "Record Inserted Successfully";
@@ -85,7 +77,7 @@ namespace StockMangementAPI_Counsume.Controllers
 
 					else
 					{
-						response = await _httpClient.PutAsync($"{_httpClient.BaseAddress}/Category/Update/{category.CategoryID}", content);
+						response = await _client.PutAsync($"{_client.BaseAddress}/Category/Update/{category.CategoryID}", content);
 						if (response.IsSuccessStatusCode)
 						{
 							TempData["Message"] = "Record Updated Successfully";
@@ -99,12 +91,16 @@ namespace StockMangementAPI_Counsume.Controllers
 				TempData["ErrorMessage"] = ex.Message;
 				Console.WriteLine(TempData["ErrorMessage"]);
 			}
+			//await LoadUserList();
 			return RedirectToAction("CategoryList");
 		}
-		public async Task<IActionResult> Delete(int CategoryID)
+		#endregion
+		#region CategoryDelete
+		public async Task<IActionResult> CategoryDelete(int CategoryID)
 		{
-			var response = await _httpClient.DeleteAsync($"{_httpClient.BaseAddress}/Category/Delete/{CategoryID}");
-			return RedirectToAction("Index");
+			var response = await _client.DeleteAsync($"{_client.BaseAddress}/Category/Delete/{CategoryID}");
+			return RedirectToAction("CategoryList");
 		}
+		#endregion
 	}
 }

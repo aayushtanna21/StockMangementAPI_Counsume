@@ -1,0 +1,46 @@
+﻿@model StockMangementAPI_Counsume.Models.CustomersModel
+<div class="card" style="width:70%;margin-left:300px">
+	<div class="card-header">
+		<div class="card-title">Customers Form</div>
+	</div>
+	<form method="post" asp-controller="Customers" asp-action="CustomerSave">
+
+		<input type="hidden" class="form-control form-control" placeholder="Customer ID" asp-for="CustomerID">
+		<div class="card-body">
+			<div class="form-group">
+				<label for="largeInput">Customer Name<span class="text-danger">*</span></label>
+				<input type="text" class="form-control form-control" placeholder="Customers Name" asp-for="CustomerName">
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Phone Number<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="Phone Number" asp-for="PhoneNumber">
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Email<span class="text-danger">*</span></label>
+				<input type="email" class="form-control form-control" placeholder="Email" asp-for="Email">
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Address<span class="text-danger">*</span></label>
+				<input type="text" class="form-control form-control" placeholder="Address" asp-for="Address">
+			</div>
+
+			<div class="form-group">
+				<label for="defaultSelect">User ID</label>
+				<select asp-for="UserID" class="form-control form-control" id="defaultSelect">
+					<option>UserName</option>
+					@foreach (var user in ViewBag.userList)
+					{
+						<option value="@user.UserID">@user.UserName</option>
+					}
+				</select>
+			</div>
+		</div>
+		<div class="card-action">
+			<button class="btn btn-success">Submit</button>
+			@* 			<a asp-action="UserList" asp-controller="User"><button class="btn btn-danger">Cancel</button></a>
+			*@
+		</div>
+	</form>
+</div>
+
+

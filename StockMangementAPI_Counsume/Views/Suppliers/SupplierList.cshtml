@@ -1,0 +1,48 @@
+﻿@model IEnumerable<StockMangementAPI_Counsume.Models.SuppliersModel>
+
+@* <div class="card-sub"> *@
+<div class="card">
+	<div class="card-body">
+		<h5 class="card-title">Suppliers Data</h5>
+		<a class="d-flex justify-content-end" asp-controller="Suppliers" asp-action="SupplierForm">
+			<button class="btn btn-primary" style="margin-top:20px">Add Suppliers</button>
+		</a>
+
+		<table class="table table-striped" style="width:70%;margin-left:300px">
+			<thead>
+				<tr>
+					<th scope="col">SupplierID</th>
+					<th scope="col">SupplierName</th>
+					<th scope="col">Phone Number</th>
+					<th scope="col">Email</th>
+					<th scope="col">Address</th>
+					<th scope="col">UserName</th>
+					<th scope="col">Created</th>
+					<th scope="col">Modified</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var row in Model)
+				{
+					<tr>
+						<td>@row.SupplierID</td>
+						<td>@row.SupplierName</td>
+						<td>@row.PhoneNumber</td>
+						<td>@row.Email</td>
+						<td>@row.Address</td>
+						<td>@row.UserName</td>
+						<td>@row.Created</td>
+						<td>@row.Modified</td>
+						<td><a asp-controller="Suppliers" asp-action="SupplierForm" asp-route-SupplierID="@row.SupplierID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>
+						<td>
+							<a asp-controller="Suppliers" asp-action="SupplierDelete" asp-route-SupplierID="@row.SupplierID">
+								<button class="btn btn-danger" onclick="return confirm('Are you sure you want delete the data?')"><i class="bi bi-trash"></i></button>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+

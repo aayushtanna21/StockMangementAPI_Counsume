@@ -1,0 +1,22 @@
+﻿@model StockMangementAPI_Counsume.Models.CategoryModel
+<div class="card" style="width:70%;margin-left:300px">
+	<div class="card-header">
+		<div class="card-title">Category Form</div>
+	</div>
+	<form method="post" asp-controller="Category" asp-action="CategorySave">
+
+		<input type="hidden" class="form-control form-control" placeholder="User ID" asp-for="CategoryID">
+		<div class="card-body">
+			<div class="form-group">
+				<label for="largeInput">Category Name<span class="text-danger">*</span></label>
+				<input type="text" class="form-control form-control" placeholder="Category Name" asp-for="CategoryName">
+			</div>
+		</div>
+		<div class="card-action">
+			<button class="btn btn-success">Submit</button>
+			@* 			<a asp-action="UserList" asp-controller="User"><button class="btn btn-danger">Cancel</button></a>
+			*@
+		</div>
+	</form>
+</div>
+

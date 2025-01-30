@@ -1,0 +1,64 @@
+﻿@model StockMangementAPI_Counsume.Models.ProductModel
+<div class="card" style="width:70%;margin-left:300px">
+	<div class="card-header">
+		<div class="card-title">User Form</div>
+	</div>
+	<form method="post" asp-controller="Product" asp-action="ProductSave">
+
+		<input type="hidden" class="form-control form-control" placeholder="Product ID" asp-for="ProductID">
+		<div class="card-body">
+			<div class="form-group">
+				<label for="largeInput">Product Name<span class="text-danger">*</span></label>
+				<input type="text" class="form-control form-control" placeholder="Product Name" asp-for="ProductName">
+			</div>
+			<div class="form-group">
+				<label for="defaultSelect">Category ID</label>
+				<select asp-for="CategoryID" class="form-control form-control" id="defaultSelect">
+					<option>CategoryName</option>
+					@foreach (var category in ViewBag.categoryList)
+					{
+						<option value="@category.CategoryID">@category.CategoryName</option>
+					}
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Stock Quantity<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="Stock Quantity" asp-for="StockQuantity">
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Price<span class="text-danger">*</span></label>
+				<input type="text" class="form-control form-control" placeholder="Price" asp-for="Price">
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Cost Price<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="Cost Price" asp-for="CostPrice">
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Reorder Level<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="Reorder Level" asp-for="ReorderLevel">
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Unit<span class="text-danger">*</span></label>
+				<input type="text" class="form-control form-control" placeholder="Unit" asp-for="Unit">
+			</div>
+
+			<div class="form-group">
+				<label for="defaultSelect">User ID</label>
+				<select asp-for="UserID" class="form-control form-control" id="defaultSelect">
+					<option>UserName</option>
+					@foreach (var user in ViewBag.userList)
+					{
+						<option value="@user.UserID">@user.UserName</option>
+					}
+				</select>
+			</div>
+		</div>
+		<div class="card-action">
+			<button class="btn btn-success">Submit</button>
+			@* 			<a asp-action="UserList" asp-controller="User"><button class="btn btn-danger">Cancel</button></a>
+			*@
+		</div>
+	</form>
+</div>
+
+

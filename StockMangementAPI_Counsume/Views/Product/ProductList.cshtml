@@ -1,0 +1,54 @@
+﻿@model IEnumerable<StockMangementAPI_Counsume.Models.ProductModel>
+
+@* <div class="card-sub"> *@
+<div class="card">
+	<div class="card-body">
+		<h5 class="card-title">Product Data</h5>
+		<a class="d-flex justify-content-end" asp-controller="Product" asp-action="ProductForm">
+			<button class="btn btn-primary" style="margin-top:20px">Add Product</button>
+		</a>
+
+		<table class="table table-striped" style="width:70%;margin-left:300px">
+			<thead>
+				<tr>
+					<th scope="col">ProductID</th>
+					<th scope="col">Product Name</th>
+					<th scope="col">Category Name</th>
+					<th scope="col">StockQuantity</th>
+					<th scope="col">Price</th>
+					<th scope="col">CostPrice</th>
+					<th scope="col">ReorderLevel</th>
+					<th scope="col">Unit</th>
+					<th scope="col">UserName</th>
+					<th scope="col">Created</th>
+					<th scope="col">Modified</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var row in Model)
+				{
+					<tr>
+						<td>@row.ProductID</td>
+						<td>@row.ProductName</td>
+						<td>@row.CategoryName</td>
+						<td>@row.StockQuantity</td>
+						<td>@row.Price</td>
+						<td>@row.CostPrice</td>
+						<td>@row.ReorderLevel</td>
+						<td>@row.Unit</td>
+						<td>@row.UserName</td>
+						<td>@row.Created</td>
+						<td>@row.Modified</td>
+						<td><a asp-controller="Product" asp-action="ProductForm" asp-route-ProductID="@row.ProductID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>
+						<td>
+							<a asp-controller="Product" asp-action="ProductDelete" asp-route-ProductID="@row.ProductID">
+								<button class="btn btn-danger" onclick="return confirm('Are you sure you want delete the data?')"><i class="bi bi-trash"></i></button>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+

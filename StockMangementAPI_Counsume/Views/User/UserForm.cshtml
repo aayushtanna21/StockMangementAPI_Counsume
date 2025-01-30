@@ -1,38 +1,36 @@
-﻿@using System.Data
-@model UserModel
-@{
-}
+﻿@model StockMangementAPI_Counsume.Models.UserModel
 <div class="card" style="width:70%;margin-left:300px">
 	<div class="card-header">
 		<div class="card-title">User Form</div>
 	</div>
 	<form method="post" asp-controller="User" asp-action="UserSave">
-		@Html.HiddenFor(m => m.UserID)
-	<div class="card-body">
+
+		<input type="hidden" class="form-control form-control" placeholder="User ID" asp-for="UserID">
+ <div class="card-body">
 		<div class="form-group">
 			<label for="largeInput">User Name<span class="text-danger">*</span></label>
-			<input type="text" class="form-control form-control" id="defaultInput" placeholder="User Name">
+			<input type="text" class="form-control form-control" placeholder="User Name" asp-for="UserName">
 		</div>
 			<div class="form-group">
 				<label for="largeInput">Password<span class="text-danger">*</span></label>
-				<input type="password" class="form-control form-control" id="defaultInput" placeholder="Password">
+				<input type="password" class="form-control form-control" placeholder="Password" asp-for="Password">
 			</div>
 			<div class="form-group">
 				<label for="largeInput">Email<span class="text-danger">*</span></label>
-				<input type="email" class="form-control form-control" id="defaultInput" placeholder="Email">
+				<input type="email" class="form-control form-control" placeholder="Email" asp-for="Email">
 			</div>
 			<div class="form-group">
 				<label for="largeInput">Phone Number<span class="text-danger">*</span></label>
-				<input type="tel" class="form-control form-control" id="defaultInput" placeholder="Phone Number">
+				<input type="tel" class="form-control form-control" placeholder="Phone Number" asp-for="PhoneNumber">
 			</div>
-			<div class="form-group">
+			@* <div class="form-group">
 				<label for="largeInput">Created<span class="text-danger">*</span></label>
-				<input type="datetime" class="form-control form-control" id="defaultInput" placeholder="Created">
+				<input type="datetime" class="form-control form-control" id="defaultInput" placeholder="Created" asp-for="Created">
 			</div>
 			<div class="form-group">
 				<label for="largeInput">Modified<span class="text-danger">*</span></label>
-				<input type="datetime" class="form-control form-control" id="defaultInput" placeholder="Modified">
-			</div>
+				<input type="datetime" class="form-control form-control" id="defaultInput" placeholder="Modified" asp-for="Modified">
+			</div> *@
 		@* <div class="form-group">
 			<label for="defaultSelect">Default Select</label>
 			<select class="form-control form-control" id="defaultSelect">
@@ -46,7 +44,7 @@
 	</div>
 	<div class="card-action">
 		<button class="btn btn-success">Submit</button>
-			<a asp-action="UserList" asp-controller="User"><button class="btn btn-danger">Cancel</button></a>
-	</div>
+@* 			<a asp-action="UserList" asp-controller="User"><button class="btn btn-danger">Cancel</button></a>
+ *@	</div>
 	</form>
 </div>

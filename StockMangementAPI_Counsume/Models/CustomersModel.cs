@@ -8,6 +8,7 @@
         public string Email { get; set; } // Email address (NotNull)
         public string Address { get; set; } // Customer address
         public int UserID { get; set; } // User who performed the transaction
+        public string? UserName { get; set; }
         public DateTime? Created { get; set; } // Creation timestamp
         public DateTime? Modified { get; set; } // Last modification timestamp (nullable)
     }

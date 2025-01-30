@@ -15,6 +15,7 @@ namespace StockMangementAPI_Counsume.Controllers
 			_client = new HttpClient();
 			_client.BaseAddress = baseAddress;
 		}
+		#region UserList
 		[HttpGet]
 		public IActionResult UserList()
 		{
@@ -31,52 +32,40 @@ namespace StockMangementAPI_Counsume.Controllers
 
 			return View(user);
 		}
+		#endregion
+		#region UserForm
 		public async Task<IActionResult> UserForm(int? UserID)
 		{
+			//await LoadUserList();
 			if (UserID.HasValue)
 			{
-				List<UserModel> user = new List<UserModel>();
-				HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/NewUser/GetByID/{UserID}").Result;
+				var response = await _client.GetAsync($"{_client.BaseAddress}/User/GetbyID/{UserID}");
 				if (response.IsSuccessStatusCode)
 				{
-					string data = response.Content.ReadAsStringAsync().Result;
-					dynamic jsonobject = JsonConvert.DeserializeObject(data);
-					var extData = JsonConvert.SerializeObject(jsonobject);
-					user = JsonConvert.DeserializeObject<List<UserModel>>(extData);
+					var data = await response.Content.ReadAsStringAsync();
+					var user = JsonConvert.DeserializeObject<UserModel>(data);
 					//ViewBag.userList = await GetStatesByCountryID(city.CountryID);
-					UserModel userModel = new UserModel
-					{
-						UserID = user[0].UserID,
-						UserName = user[0].UserName,
-						Password = user[0].Password,
-						Email = user[0].Email,
-						PhoneNumber = user[0].PhoneNumber,
-						Created = user[0].Created,
-						Modified = user[0].Modified
-					};
-					return View(userModel);
+					return View(user);
 				}
-				else
-				{
-					return RedirectToAction("UserList");
-				}
-
 			}
 			return View("UserForm", new UserModel());
 		}
+		#endregion
+		#region UserSave
 
 		[HttpPost]
 		public async Task<IActionResult> UserSave([FromForm] UserModel user)
 		{
-			try
+			try  
 			{
 				if (ModelState.IsValid)
 				{
+
 					var json = JsonConvert.SerializeObject(user);
 					var content = new StringContent(json, Encoding.UTF8, "application/json");
 					HttpResponseMessage response;
 
-					if (user.UserID == null)
+					if (user.UserID == null || user.UserID == 0)
 					{
 						response = await _client.PostAsync($"{_client.BaseAddress}/User/Insert", content);
 						if (response.IsSuccessStatusCode)
@@ -96,18 +85,25 @@ namespace StockMangementAPI_Counsume.Controllers
 						}
 					}
 				}
+
+				//if (response.IsSuccessStatusCode)
+				//    return RedirectToAction("ProductDisplay");
 			}
 			catch (Exception ex)
 			{
 				TempData["ErrorMessage"] = ex.Message;
 				Console.WriteLine(TempData["ErrorMessage"]);
 			}
+			//await LoadUserList();
 			return RedirectToAction("UserList");
 		}
-		public async Task<IActionResult> Delete(int UserID)
+		#endregion
+		#region UserDelete
+		public async Task<IActionResult> UserDelete(int UserID)
 		{
 			var response = await _client.DeleteAsync($"{_client.BaseAddress}/User/Delete/{UserID}");
-			return RedirectToAction("Index");
+			return RedirectToAction("UserList");
 		}
+		#endregion
 	}
 }

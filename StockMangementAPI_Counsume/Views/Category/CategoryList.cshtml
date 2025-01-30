@@ -1,5 +1,40 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<StockMangementAPI_Counsume.Models.CategoryModel>
+
+@* <div class="card-sub"> *@
+<div class="card">
+	<div class="card-body">
+	<h5 class="card-title">Category Data</h5>
+		<a class="d-flex justify-content-end" asp-controller="Category" asp-action="CategoryForm">
+			<button class="btn btn-primary" style="margin-top:20px">Add Category</button>
+	</a>
+
+<table class="table table-striped" style="width:70%;margin-left:300px">
+	<thead>
+		<tr>
+			<th scope="col">CategoryID</th>
+			<th scope="col">CategoryName</th>
+			<th scope="col">Created</th>
+			<th scope="col">Modified</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var row in Model)
+		{
+			<tr>
+				<td>@row.CategoryID</td>
+				<td>@row.CategoryName</td>
+				<td>@row.Created</td>
+				<td>@row.Modified</td>
+						<td><a asp-controller="Category" asp-action="CategoryForm" asp-route-CategoryID="@row.CategoryID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>
+				<td>
+							<a asp-controller="Category" asp-action="CategoryDelete" asp-route-CategoryID="@row.CategoryID">
+						<button class="btn btn-danger" onclick="return confirm('Are you sure you want delete the data?')"><i class="bi bi-trash"></i></button>
+					</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+</div>
+</div>
+
