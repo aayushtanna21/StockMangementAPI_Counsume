@@ -1,0 +1,47 @@
+﻿@model IEnumerable<StockMangementAPI_Counsume.Models.StockTransactionsModel>
+
+@* <div class="card-sub"> *@
+<div class="card">
+	<div class="card-body">
+		<h5 class="card-title">StockTransaction Data</h5>
+		<a class="d-flex justify-content-end" asp-controller="StockTransaction" asp-action="StockTransactionForm">
+			<button class="btn btn-primary" style="margin-top:20px">Add StockTransaction</button>
+		</a>
+
+		<table class="table table-striped" style="width:70%;margin-left:300px">
+			<thead>
+				<tr>
+					<th scope="col">StockTransactionID</th>
+					<th scope="col">Product Name</th>
+					<th scope="col">StockTransaction Type</th>
+					<th scope="col">Quantity</th>
+					<th scope="col">StockTransaction Date</th>
+					<th scope="col">UserName</th>
+					<th scope="col">Modified</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var row in Model)
+				{
+					<tr>
+						<td>@row.StockTransactionID</td>
+						<td>@row.ProductName</td>
+						<td>@row.StockTransactionType</td>
+						<td>@row.Quantity</td>
+						<td>@row.StockTransactionDate</td>
+						<td>@row.UserName</td>
+						<td>@row.Modified</td>
+						<td><a asp-controller="StockTransaction" asp-action="StockTransactionForm" asp-route-StockTransactionID="@row.StockTransactionID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>
+						<td>
+							<a asp-controller="StockTransaction" asp-action="StockTransactionDelete" asp-route-StockTransactionID="@row.StockTransactionID">
+								<button class="btn btn-danger" onclick="return confirm('Are you sure you want delete the data?')"><i class="bi bi-trash"></i></button>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+

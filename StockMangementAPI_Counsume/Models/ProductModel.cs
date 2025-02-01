@@ -16,4 +16,9 @@
         public DateTime? Created { get; set; } // Creation timestamp
         public DateTime? Modified { get; set; }
     }
+    public class ProductDropDownModel
+    {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+    }
 }
