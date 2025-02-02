@@ -1,0 +1,39 @@
+﻿@model StockMangementAPI_Counsume.Models.PaymentsModel
+
+<div class="card" style="width:70%;margin-left:300px">
+	<div class="card-header">
+		<div class="card-title">Payment Form</div>
+	</div>
+	<form method="post" asp-controller="Payment" asp-action="PaymentSave">
+
+		<input type="hidden" class="form-control form-control" placeholder="Payment ID" asp-for="PaymentID">
+		<div class="card-body">
+			<div class="form-group">
+				<label for="defaultSelect">Bill ID</label>
+				<select asp-for="BillID" class="form-control form-control" id="defaultSelect">
+					<option>BillDate</option>
+					@foreach (var bills in ViewBag.billsList)
+					{
+						<option value="@bills.BillID">@bills.BillDate</option>
+					}
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Payment Mode<span class="text-danger">*</span></label>
+				<input type="text" class="form-control form-control" placeholder="Payment Mode" asp-for="PaymentMode">
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Amount Paid<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="Amount Paid" asp-for="AmountPaid">
+			</div>
+		</div>
+		<div class="card-action">
+			<button class="btn btn-success">Submit</button>
+			@* 			<a asp-action="UserList" asp-controller="User"><button class="btn btn-danger">Cancel</button></a>
+			*@
+		</div>
+	</form>
+</div>
+
+
+

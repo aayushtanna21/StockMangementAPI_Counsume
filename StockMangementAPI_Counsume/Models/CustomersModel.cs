@@ -12,4 +12,9 @@
         public DateTime? Created { get; set; } // Creation timestamp
         public DateTime? Modified { get; set; } // Last modification timestamp (nullable)
     }
+    public class CustomersDropDownModel
+    {
+        public int CustomerID { get; set; }
+        public string CustomerName { get; set; }
+    }
 }

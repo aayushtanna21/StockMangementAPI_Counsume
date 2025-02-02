@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<StockMangementAPI_Counsume.Models.BillsModel>
+
+@* <div class="card-sub"> *@
+<div class="card">
+	<div class="card-body">
+		<h5 class="card-title">Bills Data</h5>
+		<a class="d-flex justify-content-end" asp-controller="Bills" asp-action="BillsForm">
+			<button class="btn btn-primary" style="margin-top:20px">Add Bills</button>
+		</a>
+
+		<table class="table table-striped" style="width:70%;margin-left:300px">
+			<thead>
+				<tr>
+					<th scope="col">BillID</th>
+					<th scope="col">Customer Name</th>
+					<th scope="col">Total Amount</th>
+					<th scope="col">Discount</th>
+					<th scope="col">Payment Mode</th>
+					<th scope="col">Bill Date</th>
+					<th scope="col">UserName</th>
+					<th scope="col">Modified</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var row in Model)
+				{
+					<tr>
+						<td>@row.BillID</td>
+						<td>@row.CustomerName</td>
+						<td>@row.TotalAmount</td>
+						<td>@row.Discount</td>
+						<td>@row.PaymentMode</td>
+						<td>@row.BillDate</td>
+						<td>@row.UserName</td>
+						<td>@row.Modified</td>
+						<td><a asp-controller="Bills" asp-action="BillsForm" asp-route-BillID="@row.BillID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>
+						<td>
+							<a asp-controller="Bills" asp-action="BillsDelete" asp-route-BillID="@row.BillID">
+								<button class="btn btn-danger" onclick="return confirm('Are you sure you want delete the data?')"><i class="bi bi-trash"></i></button>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+

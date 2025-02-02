@@ -1,0 +1,53 @@
+﻿@model StockMangementAPI_Counsume.Models.BillDetailsModel
+
+<div class="card" style="width:70%;margin-left:300px">
+	<div class="card-header">
+		<div class="card-title">BillsDetail Form</div>
+	</div>
+	<form method="post" asp-controller="BillsDetail" asp-action="BillsDetailSave">
+
+		<input type="hidden" class="form-control form-control" placeholder="BillDetail ID" asp-for="BillDetailID">
+		<div class="card-body">
+			<div class="form-group">
+				<label for="defaultSelect">Bill ID</label>
+				<select asp-for="BillID" class="form-control form-control" id="defaultSelect">
+					<option>BillDate</option>
+					@foreach (var bills in ViewBag.billsList)
+					{
+						<option value="@bills.BillID">@bills.BillDate</option>
+					}
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="defaultSelect">Product ID</label>
+				<select asp-for="ProductID" class="form-control form-control" id="defaultSelect">
+					<option>ProductName</option>
+					@foreach (var products in ViewBag.productList)
+					{
+						<option value="@products.ProductID">@products.ProductName</option>
+					}
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="largeInput">Quantity<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="Quantity" asp-for="Quantity">
+			</div>
+			<div class="form-group">
+				<label for="largeInput">UnitPrice<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="UnitPrice" asp-for="UnitPrice">
+			</div>
+
+			<div class="form-group">
+				<label for="largeInput">SubTotal<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="SubTotal" asp-for="SubTotal">
+			</div>
+		</div>
+		<div class="card-action">
+			<button class="btn btn-success">Submit</button>
+			@* 			<a asp-action="UserList" asp-controller="User"><button class="btn btn-danger">Cancel</button></a>
+			*@
+		</div>
+	</form>
+</div>
+
+

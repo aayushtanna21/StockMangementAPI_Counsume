@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<StockMangementAPI_Counsume.Models.PaymentsModel>
+
+@* <div class="card-sub"> *@
+<div class="card">
+	<div class="card-body">
+		<h5 class="card-title">Payment Data</h5>
+		<a class="d-flex justify-content-end" asp-controller="Payment" asp-action="PaymentForm">
+			<button class="btn btn-primary" style="margin-top:20px">Add Payment</button>
+		</a>
+
+		<table class="table table-striped" style="width:70%;margin-left:300px">
+			<thead>
+				<tr>
+					<th scope="col">PaymentID</th>
+					<th scope="col">Bill Date</th>
+					<th scope="col">Payment Mode</th>
+					<th scope="col">Amount Paid</th>
+					<th scope="col">Payment Date</th>
+					<th scope="col">Modified</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var row in Model)
+				{
+					<tr>
+						<td>@row.PaymentID</td>
+						<td>@row.BillDate</td>
+						<td>@row.PaymentMode</td>
+						<td>@row.AmountPaid</td>
+						<td>@row.PaymentDate</td>
+						<td>@row.Modified</td>
+						<td><a asp-controller="Payment" asp-action="PaymentForm" asp-route-PaymentID="@row.PaymentID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>
+						<td>
+							<a asp-controller="Payment" asp-action="PaymentDelete" asp-route-PaymentID="@row.PaymentID">
+								<button class="btn btn-danger" onclick="return confirm('Are you sure you want delete the data?')"><i class="bi bi-trash"></i></button>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
