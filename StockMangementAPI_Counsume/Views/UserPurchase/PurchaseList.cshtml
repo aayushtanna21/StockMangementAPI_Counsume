@@ -1,0 +1,53 @@
+﻿@model IEnumerable<StockMangementAPI_Counsume.Models.UserPurchaseModel>
+@{
+	Layout = "_UserLayout";
+}
+@* <div class="card-sub"> *@
+<div class="card">
+	<div class="card-body">
+		<h5 class="card-title">Purchase Data</h5>
+		<a class="d-flex justify-content-end" asp-controller="UserPurchase" asp-action="PurchaseForm">
+			<button class="btn btn-primary" style="margin-top:20px">Add Purchase</button>
+		</a>
+
+		<table class="table table-striped" style="width:70%;margin-left:300px">
+			<thead>
+				<tr>
+					<th scope="col">PurchaseID</th>
+					<th scope="col">Product Name</th>
+					<th scope="col">CustomerName</th>
+					<th scope="col">SupplierName</th>
+					<th scope="col">Quantity</th>
+					<th scope="col">CostPrice</th>
+					<th scope="col">PurchaseDate</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var row in Model)
+				{
+					<tr>
+						<td>@row.PurchaseID</td>
+						<td>@row.ProductName</td>
+						<td>@row.CustomerName</td>
+						<td>@row.SupplierName</td>
+						<td>@row.Quantity</td>
+						<td>@row.CostPrice</td>
+						<td>@row.PurchaseDate</td>
+						
+						<td><a asp-controller="UserPurchase" asp-action="PurchaseForm" asp-route-PurchaseID="@row.PurchaseID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>
+						<td>
+							<a asp-controller="UserPurchase" asp-action="PurchaseDelete" asp-route-PurchaseID="@row.PurchaseID">
+								<button class="btn btn-danger" onclick="return confirm('Are you sure you want delete the data?')"><i class="bi bi-trash"></i></button>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+

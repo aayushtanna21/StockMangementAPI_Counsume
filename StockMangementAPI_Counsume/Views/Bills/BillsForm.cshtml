@@ -7,32 +7,30 @@
 	<form method="post" asp-controller="Bills" asp-action="BillsSave">
 
 		<input type="hidden" class="form-control form-control" placeholder="Bill ID" asp-for="BillID">
+		<div class="card-body">
 			<div class="form-group">
 				<label for="defaultSelect">Customer ID</label>
 				<select asp-for="CustomerID" class="form-control form-control" id="defaultSelect">
 					<option>CustomerName</option>
-				@foreach (var customers in ViewBag.customersList)
+					@foreach (var customers in ViewBag.customersList)
 					{
-					<option value="@customers.CustomerID">@customers.CustomerName</option>
+						<option value="@customers.CustomerID">@customers.CustomerName</option>
 					}
 				</select>
 			</div>
 			<div class="form-group">
-			<label for="largeInput">Total Amount<span class="text-danger">*</span></label>
-			<input type="tel" class="form-control form-control" placeholder="Total Amount" asp-for="TotalAmount">
+				<label for="largeInput">Total Amount<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="Total Amount" asp-for="TotalAmount">
 			</div>
 			<div class="form-group">
-			<label for="largeInput">Discount<span class="text-danger">*</span></label>
-			<input type="tel" class="form-control form-control" placeholder="Discount" asp-for="Discount">
+				<label for="largeInput">Discount<span class="text-danger">*</span></label>
+				<input type="tel" class="form-control form-control" placeholder="Discount" asp-for="Discount">
 			</div>
 			<div class="form-group">
-			<label for="largeInput">Payment Mode<span class="text-danger">*</span></label>
-			<input type="text" class="form-control form-control" placeholder="Payment Mode" asp-for="PaymentMode">
+				<label for="largeInput">Payment Mode<span class="text-danger">*</span></label>
+				<input type="text" class="form-control form-control" placeholder="Payment Mode" asp-for="PaymentMode">
 			</div>
-			<div class="form-group">
-			<label for="largeInput">Bil lDate<span class="text-danger">*</span></label>
-			<input type="text" class="form-control form-control" placeholder="Bill Date" asp-for="BillDate">
-			</div>
+
 			<div class="form-group">
 				<label for="defaultSelect">User ID</label>
 				<select asp-for="UserID" class="form-control form-control" id="defaultSelect">
@@ -51,6 +49,5 @@
 		</div>
 	</form>
 </div>
-
 
 

@@ -13,13 +13,14 @@
 				<tr>
 					<th scope="col">ProductID</th>
 					<th scope="col">Product Name</th>
+					<th scope="col">Product Image</th>
 					<th scope="col">Category Name</th>
 					<th scope="col">StockQuantity</th>
 					<th scope="col">Price</th>
 					<th scope="col">CostPrice</th>
 					<th scope="col">ReorderLevel</th>
 					<th scope="col">Unit</th>
-					<th scope="col">UserName</th>
+					<th scope="col">CustomerName</th>
 					<th scope="col">Created</th>
 					<th scope="col">Modified</th>
 				</tr>
@@ -30,13 +31,19 @@
 					<tr>
 						<td>@row.ProductID</td>
 						<td>@row.ProductName</td>
+						<td>
+							@if (!string.IsNullOrEmpty(row.ProductImage))
+							{
+								<img src="data:image/png;base64,@row.ProductImage" width="100" />
+							}
+						</td>
 						<td>@row.CategoryName</td>
 						<td>@row.StockQuantity</td>
 						<td>@row.Price</td>
 						<td>@row.CostPrice</td>
 						<td>@row.ReorderLevel</td>
 						<td>@row.Unit</td>
-						<td>@row.UserName</td>
+						<td>@row.CustomerName</td>
 						<td>@row.Created</td>
 						<td>@row.Modified</td>
 						<td><a asp-controller="Product" asp-action="ProductForm" asp-route-ProductID="@row.ProductID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>

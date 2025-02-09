@@ -3,7 +3,7 @@
 	<div class="card-header">
 		<div class="card-title">Product Form</div>
 	</div>
-	<form method="post" asp-controller="Product" asp-action="ProductSave">
+	<form method="post" asp-controller="Product" asp-action="ProductSave" enctype="multipart/form-data">
 
 		<input type="hidden" class="form-control form-control" placeholder="Product ID" asp-for="ProductID">
 		<div class="card-body">
@@ -11,6 +11,20 @@
 				<label for="largeInput">Product Name<span class="text-danger">*</span></label>
 				<input type="text" class="form-control form-control" placeholder="Product Name" asp-for="ProductName">
 			</div>
+			<div class="form-group">
+				<label>Upload Product Image<span class="text-danger">*</span></label>
+				<input type="file" class="form-control" asp-for="ImageFile" />
+
+				<!-- Show Existing Image if Editing -->
+				@if (!string.IsNullOrEmpty(Model?.ProductImage))
+				{
+					<div>
+						<label>Current Image:</label>
+						<img src="data:image/png;base64,@Model.ProductImage" width="100" />
+					</div>
+				}
+			</div>
+
 			<div class="form-group">
 				<label for="defaultSelect">Category ID</label>
 				<select asp-for="CategoryID" class="form-control form-control" id="defaultSelect">
@@ -43,12 +57,12 @@
 			</div>
 
 			<div class="form-group">
-				<label for="defaultSelect">User ID</label>
-				<select asp-for="UserID" class="form-control form-control" id="defaultSelect">
-					<option>UserName</option>
-					@foreach (var user in ViewBag.userList)
+				<label for="defaultSelect">Customer ID</label>
+				<select asp-for="CustomerID" class="form-control form-control" id="defaultSelect">
+					<option>CustomerName</option>
+					@foreach (var customers in ViewBag.customersList)
 					{
-						<option value="@user.UserID">@user.UserName</option>
+						<option value="@customers.CustomerID">@customers.CustomerName</option>
 					}
 				</select>
 			</div>

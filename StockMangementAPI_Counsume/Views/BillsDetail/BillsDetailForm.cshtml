@@ -12,9 +12,9 @@
 				<label for="defaultSelect">Bill ID</label>
 				<select asp-for="BillID" class="form-control form-control" id="defaultSelect">
 					<option>BillDate</option>
-					@foreach (var bills in ViewBag.billsList)
+					@foreach (var bills in ViewBag.billList)
 					{
-						<option value="@bills.BillID">@bills.BillDate</option>
+						<option value="@bills.BillID">@bills.BillInfo</option>
 					}
 				</select>
 			</div>

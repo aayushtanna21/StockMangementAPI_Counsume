@@ -1,0 +1,52 @@
+﻿@model StockMangementAPI_Counsume.Models.UserPurchaseReturnModel
+@{
+    Layout = "_UserLayout";
+}
+<h5 class="card-title fw-semibold mb-4">PurchaseReturn Forms</h5>
+<div class="card">
+    <div class="card-body">
+        <form method="post" asp-controller="UserPurchaseReturn" asp-action="PurchaseReturnList">
+            <input type="hidden" class="form-control form-control" placeholder="Sales ID" asp-for="PurchaseReturnID">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Product ID<span class="text-danger">*</span></label>
+                <select asp-for="ProductID" class="form-control form-control" id="defaultSelect">
+                    <option>ProductName</option>
+                    @foreach (var product in ViewBag.productList)
+                    {
+                        <option value="@product.ProductID">@product.ProductName</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Customer ID<span class="text-danger">*</span></label>
+                <select asp-for="CustomerID" class="form-control form-control" id="defaultSelect">
+                    <option>CustomerName</option>
+                    @foreach (var customers in ViewBag.customersList)
+                    {
+                        <option value="@customers.CustomerID">@customers.CustomerName</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Supplier ID<span class="text-danger">*</span></label>
+                <select asp-for="SupplierID" class="form-control form-control" id="defaultSelect">
+                    <option>SupplierName</option>
+                    @foreach (var suppliers in ViewBag.suppliersList)
+                    {
+                        <option value="@suppliers.SupplierID">@suppliers.SupplierName</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Quantity<span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" placeholder="Quantity" asp-for="Quantity">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+
+

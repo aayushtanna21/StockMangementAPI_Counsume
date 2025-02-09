@@ -17,7 +17,21 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+	name: "admin",
+	pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
+//defaults: new { },
+//constraints: null
+);
+
+app.MapControllerRoute(
+	name: "user",
+	pattern: "User/{controller=UserHome}/{action=Index}/{id?}"
+//defaults: new { },
+//constraints: null
+);
+
+app.MapControllerRoute(
+	name: "default",
+	pattern: "{controller=MainHome}/{action=MainHomeDisplay}/{id?}");
 
 app.Run();

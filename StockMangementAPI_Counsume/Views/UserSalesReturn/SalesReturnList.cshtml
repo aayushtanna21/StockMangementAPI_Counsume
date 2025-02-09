@@ -1,0 +1,47 @@
+﻿@model IEnumerable<StockMangementAPI_Counsume.Models.UserSalesReturnModel>
+@{
+	Layout = "_UserLayout";
+}
+@* <div class="card-sub"> *@
+<div class="card">
+	<div class="card-body">
+		<h5 class="card-title">SalesReturn Data</h5>
+		<a class="d-flex justify-content-end" asp-controller="UserSalesReturn" asp-action="SalesReturnForm">
+			<button class="btn btn-primary" style="margin-top:20px">Add SalesReturn</button>
+		</a>
+
+		<table class="table table-striped" style="width:70%;margin-left:300px">
+			<thead>
+				<tr>
+					<th scope="col">SalesReturnID</th>
+					<th scope="col">Product Name</th>
+					<th scope="col">Quantity</th>
+					<th scope="col">SaleReturnDate</th>
+					<th scope="col">CustomerName</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var row in Model)
+				{
+					<tr>
+						<td>@row.SalesReturnID</td>
+						<td>@row.ProductName</td>
+						<td>@row.Quantity</td>
+						<td>@row.SaleReturnDate</td>
+						<td>@row.CustomerName</td>
+						<td><a asp-controller="UserSalesReturn" asp-action="SalesReturnForm" asp-route-SalesReturnID="@row.SalesReturnID"><button class="btn btn-success"><i class="bi bi-pencil"></i></button></a></td>
+						<td>
+							<a asp-controller="UserSalesReturn" asp-action="SalesReturnDelete" asp-route-SalesReturnID="@row.SalesReturnID">
+								<button class="btn btn-danger" onclick="return confirm('Are you sure you want delete the data?')"><i class="bi bi-trash"></i></button>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+
